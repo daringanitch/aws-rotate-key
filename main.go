@@ -127,9 +127,9 @@ func main() {
 
 	// Replace key pair in credentials file
 	// This search & replace does not limit itself to the specified profile, which may be useful if the user is using the same key in multiple profiles
-	re := regexp.MustCompile(fmt.Sprintf(`(?m)^aws_access_key_id ?= ?%s`, regexp.QuoteMeta(creds.AccessKeyID)))
+	re := regexp.MustCompile(fmt.Sprintf(`(?m)^aws_access_key_id\s*?=\s*?%s`, regexp.QuoteMeta(creds.AccessKeyID)))
 	text = re.ReplaceAllString(text, `aws_access_key_id=`+*respCreateAccessKey.AccessKey.AccessKeyId)
-	re = regexp.MustCompile(fmt.Sprintf(`(?m)^aws_secret_access_key ?= ?%s`, regexp.QuoteMeta(creds.SecretAccessKey)))
+	re = regexp.MustCompile(fmt.Sprintf(`(?m)^aws_secret_access_key\s*?=\s*?%s`, regexp.QuoteMeta(creds.SecretAccessKey)))
 	text = re.ReplaceAllString(text, `aws_secret_access_key=`+*respCreateAccessKey.AccessKey.SecretAccessKey)
 
 	// Verify that the regexp actually replaced something
